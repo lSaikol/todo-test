@@ -2,13 +2,13 @@ const jwt = require('jsonwebtoken');
 const APIError = require('../error/APIError');
 
 module.exports = function (req, res, next) {
-    if (req.method === "OPTIONS") next();
+    if (req.method === "OPTIONS") return next();
     try {
         const token = req.headers.authorization;
         if (!token) {
             return next(APIError.unauthorized())
         }
-        const decodedToken = jwt.decode(token, process.env.TOKEN_SECRET);
+        const decodedToken = jwt.decode(token, process.env.ACCESS_TOKEN_SECRET);
         if (!decodedToken) {
             return next(APIError.unauthorized())
         }

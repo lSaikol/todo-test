@@ -7,7 +7,7 @@ module.exports = new class UserController {
 
     async login(req, res, next) {
         try {
-            const { login, password } = req.query;
+            const { login, password } = req.body;
             if (!login || !password) {
                 return next(APIError.badRequest('Не указан пароль или пароль'));
             }
@@ -23,7 +23,7 @@ module.exports = new class UserController {
 
     async register(req, res, next) {
         try {
-            const { login, password } = req.query;
+            const { login, password } = req.body;
             if (!login || !password) {
                 return next(APIError.badRequest('Не указан пароль или пароль'));
             }
